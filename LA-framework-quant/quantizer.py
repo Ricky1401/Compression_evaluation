@@ -1,0 +1,73 @@
+from lib_gptq.datautils import *
+import shutil
+from lib_gptq.modelutils import DEV
+
+class Quantizer:
+    def __init__(self, args, device=DEV):
+        self.args = args
+        self.model_type = args.model_type.lower()
+        self.checkpoint_path = args.checkpoint_path
+        if ("peft" in self.model_type):
+            self.tokenizer_path = args.tokenizer_path
+        else:
+            self.tokenizer_path = args.checkpoint_path
+        self.device = device
+        self.model = self._load_model()
+        print("Seqlen:", self.model.seqlen)
+        self.seqlen = self.model.seqlen
+        dataloader, testloader = get_loaders(
+            args.dataset, nsamples=args.nsamples, seed=args.seed, model=args.tokenizer_path, seqlen=self.model.seqlen
+        )
+        self.dataloader = dataloader
+
+    def _load_model(self):
+        if self.model_type == "opt":
+            from lib_gptq.opt import get_opt
+            return get_opt(self.checkpoint_path).to(self.device)
+        elif self.model_type == "llama":
+            from lib_gptq.llama import get_llama
+            return get_llama(self.checkpoint_path).to(self.device)
+        elif self.model_type == "qwen":
+            from lib_gptq.qwen3 import get_qwen
+            return get_qwen(self.checkpoint_path).to(self.device)
+        elif self.model_type == "qwen_peft":
+            from lib_gptq.qwen3 import get_qwen_peft
+            return get_qwen_peft(self.checkpoint_path).to(self.device)
+        elif self.model_type == "bloom":
+            from lib_gptq.bloom import get_bloom
+            return get_bloom(self.checkpoint_path).to(self.device)
+        elif self.model_type == "gpt2":
+            from lib_gptq.gpt2 import get_gpt2
+            return get_gpt2(self.checkpoint_path).to(self.device)
+        else:
+            raise ValueError(f"Unsupported model type: {self.model_type}")
+        
+
+    def quantize(self):
+        dataloader = self.dataloader
+        save_path = self.args.save
+        shutil.copytree(self.checkpoint_path, save_path, dirs_exist_ok=True)
+        if self.model_type == "opt":
+            from lib_gptq.opt import opt_sequential_ext
+            quantizers = opt_sequential_ext(self.args, self.model, dataloader, self.device)
+        elif self.model_type == "llama":
+            from lib_gptq.llama import llama_sequential_ext
+            quantizers = llama_sequential_ext(self.args, self.model, dataloader, self.device)
+        elif self.model_type == "qwen":
+            from lib_gptq.qwen3 import qwen_sequential_ext
+            quantizers = qwen_sequential_ext(self.args, self.model, dataloader, self.device)
+        elif self.model_type == "qwen_peft":
+            from lib_gptq.qwen3 import qwen_peft_sequential_ext
+            quantizers = qwen_peft_sequential_ext(self.args, self.model, dataloader, self.device, self.seqlen)
+        elif self.model_type == "bloom":
+            from lib_gptq.bloom import bloom_sequential_ext
+            quantizers = bloom_sequential_ext(self.args, self.model, dataloader, self.device)
+        elif self.model_type == "gpt2":
+            from lib_gptq.gpt2 import gpt2_sequential_ext
+            quantizers = gpt2_sequential_ext(self.args, self.model, dataloader, self.device)
+        else:
+            raise ValueError(f"Unsupported model type: {self.model_type}")
+
+        # Save the quantized model
+        self.model.save_pretrained(save_path)
+        print(f"Quantized model saved to {save_path}")
