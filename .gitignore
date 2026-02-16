@@ -1,55 +1,16 @@
-# Prerequisites
-*.d
+LA-framework-dist/checkpoints/
+LA-framework-dist/results/
+LA-framework-dist/data/
+LA-framework-dist/local_venv/
+LA-framework-dist/quantized_models/
+LA-framework-dist/__pycache__/
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+LA-framework-quant/checkpoints/
+LA-framework-quant/results/
+LA-framework-quant/data/
+LA-framework-quant/local_venv/
+LA-framework-quant/quantized_models/
+LA-framework-quant/__pycache__/
 
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-# debug information files
-*.dwo
+__pycache__
+.ipynb_checkpoints
