@@ -4,6 +4,7 @@ LA-framework-dist/data/
 LA-framework-dist/local_venv/
 LA-framework-dist/quantized_models/
 LA-framework-dist/__pycache__/
+LA-framework-dist/.ipynb_checkpoints/
 
 LA-framework-quant/checkpoints/
 LA-framework-quant/results/
@@ -11,6 +12,7 @@ LA-framework-quant/data/
 LA-framework-quant/local_venv/
 LA-framework-quant/quantized_models/
 LA-framework-quant/__pycache__/
+LA-framework-quant/.ipynb_checkpoints/
 
 __pycache__
 .ipynb_checkpoints
