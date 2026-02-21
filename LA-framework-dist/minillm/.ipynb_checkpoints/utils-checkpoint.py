@@ -146,7 +146,8 @@ def get_model(args, device: int, tokenizer=None) -> PreTrainedModel:
     else:
         config.is_model_parallel = False
         if not (tokenizer is None):    ###### To adjust tokenizers and model vocabs
-            model = AutoModelForCausalLM.from_pretrained(args.model_path, config=config, device_map={"": device}, torch_dtype=dtype)
+            #model = AutoModelForCausalLM.from_pretrained(args.model_path, config=config, device_map={"": device}, torch_dtype=dtype)   ###### fixing OOM
+            model = AutoModelForCausalLM.from_pretrained(args.model_path, config=config, device_map="auto", torch_dtype=dtype)
             model.config.pad_token_id = tokenizer.pad_token_id
             model.config.eos_token_id = tokenizer.eos_token_id
             model.resize_token_embeddings(len(tokenizer))

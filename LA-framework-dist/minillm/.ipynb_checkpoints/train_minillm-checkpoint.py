@@ -41,7 +41,8 @@ def get_teacher_model(args, device):
                 model = AutoPeftModelForCausalLM.from_pretrained(
                     args.teacher_model_path,
                     is_trainable=True,
-                    device_map="cuda"
+                    #device_map="cuda",   ###### fixing OOM
+                    device_map="auto"
                 )
                 model.print_trainable_parameters()
                 #input()
@@ -64,6 +65,7 @@ def main():
     initialize(args)
 
     device = torch.cuda.current_device()
+    #device = "cpu"
     
     os.makedirs(args.save, exist_ok=True)
     if dist.get_rank() == 0:

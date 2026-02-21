@@ -40,6 +40,11 @@ from utils import print_rank, save_rank, get_rank, all_gather, save_parallel
 from rouge_metric import compute_metrics
 
 
+import gc    ######### garbage collector
+
+
+
+
 class PPOTrainer():
     """
     RL model trainer with an `accelerate` based backend
@@ -51,6 +56,8 @@ class PPOTrainer():
         self.ds_config = ds_config
         self.reward_fn = reward_fn
         self.device = torch.cuda.current_device()
+        ###### Mod device
+        #self.device = "cpu"
 
         if int(os.environ.get("WORLD_SIZE", 1)) > 1:
             dist.barrier(device_ids=[int(os.environ.get("LOCAL_RANK", 0))])
@@ -245,14 +252,33 @@ class PPOTrainer():
         self.global_iter_count = 1
         self.nth_evaluation = 0
 
+        ###### Garbage collector
+        gc.collect()
+        torch.cuda.empty_cache()
+        
         self.evaluate()
 
+        ###### Garbage collector
+        gc.collect()
+        torch.cuda.empty_cache()
+
         print_rank("Total Steps:", self.total_steps, "Data Epochs:", self.args.epochs)
+
+        
+        
         lm_epochs = 0        
         logging_stats = defaultdict(float)
 
         for training_epoch in range(self.args.training_epochs):
+            ###### Garbage collector
+            gc.collect()
+            torch.cuda.empty_cache()
+            
             for ppo_epoch in range(self.n_updates_per_batch):
+                ###### Garbage collector
+                gc.collect()
+                torch.cuda.empty_cache()
+                
                 for it, batch in enumerate(self.train_dataloader):
                     if self.lm_pipeline is not None:
                         try:
@@ -285,6 +311,11 @@ class PPOTrainer():
 
                     # forward
                     forward_time = time()
+                    
+                    ###### Garbage collector
+                    gc.collect()
+                    torch.cuda.empty_cache()
+                    
                     # compute rl-related loss on explored data
                     rl_loss, rl_loss_stats = self.losses.ppo_loss(batch, ppo_logits)
                     stats.update(rl_loss_stats)
