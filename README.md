@@ -14,3 +14,9 @@ Run in this order:
 
 
 - `Plot_on_eval_processed.ipynb` to compute metrics on generated data,
+
+
+Statistiche:
+- PEFT 90_2048 : 1h01
+- Generation with PEFT 90_2048-batched-64: 3h19
+- 

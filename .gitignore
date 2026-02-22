@@ -19,3 +19,4 @@ __pycache__
 
 TTE_uf*
 *fine_tuned_*/
+*eval_processed_parallel.json
