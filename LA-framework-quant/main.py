@@ -14,29 +14,14 @@ if __name__ == "__main__":
     method = args.method # "quant" or "dist", depending on your use case
 
     if method == "quant":
-        # Example for OPT
-        """
-        args.model_type = "opt"  # Example model type
-        args.checkpoint_path = "./checkpoints/facebook-350m"  # Example checkpoint path
-        args.dataset = "c4"  # Example dataset
-        args.wbits = 4  # Example bits for quantization
-        args.save = "./results/quantized_model/facebook-350m"  # Example save path
-        
-        # Example for GPT-2
-        args.model_type = "gpt2"
-        args.checkpoint_path = "./checkpoints/gpt2-base"
-        args.dataset = "c4"
-        args.wbits = 4
-        args.save = "./results/quantized_model/gpt2-base"
-        """
         
         # Example for Qwen
         args.model_type = "qwen_peft"
-        args.checkpoint_path = "./fine_tuned_qwen3-4b/checkpoint-277"
-        args.tokenizer_path = "../Qwen/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c"
+        args.checkpoint_path = "./90_fine_tuned_qwen3-1.7b/checkpoint-277"
+        args.tokenizer_path = "../Qwen3-1.7B"
         args.dataset = "wikitext2_peft"
         args.wbits = 4
-        args.save = "./LA-Framework/results/quantized_model/FT_Qwen3-4B"
+        args.save = "./LA-framework-quant/results/quantized_model/FT_Qwen3-1.7B_90"
         
 
         quantizer = Quantizer(args)
