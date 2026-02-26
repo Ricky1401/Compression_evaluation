@@ -5,6 +5,11 @@ LA-framework-dist/local_venv/
 LA-framework-dist/quantized_models/
 LA-framework-dist/__pycache__/
 LA-framework-dist/.ipynb_checkpoints/
+LA-framework-dist/minillm/__pycache__/
+LA-framework-dist/*/__pycache__/
+
+LA-framework-dist/*/*/__pycache__/
+
 
 LA-framework-quant/checkpoints/
 LA-framework-quant/results/
@@ -20,3 +25,4 @@ __pycache__
 TTE_uf*
 *fine_tuned_*/
 *eval_processed_parallel.json
+__pycache__/
