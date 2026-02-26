@@ -6,7 +6,7 @@ LA-framework-dist/quantized_models/
 LA-framework-dist/__pycache__/
 LA-framework-dist/.ipynb_checkpoints/
 LA-framework-dist/minillm/__pycache__/
-LA-framework-dist/*/__pycache__/
+LA-framework-dist/**/__pycache__/
 
 LA-framework-dist/*/*/__pycache__/
 

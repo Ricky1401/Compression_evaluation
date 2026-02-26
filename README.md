@@ -1,4 +1,4 @@
-# Compression_evaluation
+. # Compression_evaluation
 This repository contains all the code about Rossetto Riccardo's thesis about how model compression techniques affect model bias
 
 Run in this order:
@@ -22,18 +22,25 @@ Statistiche (su PEFT con output invertito):
 - Quantizing PEFT 90_2048 : 0h12
 - Generation with quantized model batched-64 : 3h19
 
-- PEFT 90_Qwen3-1.7B : 1h01
-- Generation with PEFT 90_Qwen3-1.7B : 3h19
+- PEFT 90_Qwen3-1.7B : 1h01 ???
+- Generation with PEFT 90_Qwen3-1.7B : 3h19 ???
 - Quantizing PEFT 90_Qwen3-1.7B : 0h7
 - Generation with quantized model batched-64 : 1h45
 
 Statistiche (su PEFT con output corretto):
-- PEFT 90_2048 : 
-- Generation with PEFT 90_2048-batched-64 : 
-- Quantizing PEFT 90_2048 : 
-- Generation with quantized model batched-64 : 
+- PEFT 90_2048 : 1h01
+- Generation with PEFT 90_2048-batched-64 : ~3h
+- Quantizing PEFT 90_2048 : 0h16
+- Generation with quantized model batched-64 : ~3h20
 
-- PEFT 90_Qwen3-1.7B : 
-- Generation with PEFT 90_Qwen3-1.7B : 
-- Quantizing PEFT 90_Qwen3-1.7B : 
-- Generation with quantized model batched-64 : 
+- PEFT 90_Qwen3-1.7B : 0h32
+- Generation with PEFT 90_Qwen3-1.7B : ~1h47
+- Quantizing PEFT 90_Qwen3-1.7B : 0h8
+- Generation with quantized model batched-64 : ~1h46
+
+- Distillation 1:20 -> 16:30 : 1g15h50
+
+
+
+
+

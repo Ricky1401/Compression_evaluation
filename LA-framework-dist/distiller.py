@@ -118,7 +118,7 @@ class Distiller:
         #self.process_data_dolly()   ## uncomment after mpu problem
         #self.perform_sft_teacher()
         #self.fix_vocabulary()
-        os.system(f"bash LA-Framework-dist-peft/minillm/scripts/generic/minillm/train_custom.sh LA-Framework-dist-peft/minillm {self.student_model.name} {self.student_model.checkpoint_path} {self.teacher_model.name} {self.teacher_model.checkpoint_path}")
+        os.system(f"bash LA-framework-dist/minillm/scripts/generic/minillm/train_custom.sh LA-framework-dist/minillm {self.student_model.name} {self.student_model.checkpoint_path} {self.teacher_model.name} {self.teacher_model.checkpoint_path}")
 
 
         return "Bye"

@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
     elif method == "dist":
         # Example checkpoint paths (update as needed)
-        teacher = Model("Qwen3-4_peft", "./fine_tuned_qwen3-4b/checkpoint-277")
+        teacher = Model("Qwen3-4_peft", "./90_2048_fine_tuned_qwen3-4b/checkpoint-277")
         #teacher = Model("facebook-125m", "./checkpoints/facebook-125m")
         #student = Model("gpt2-base", "./checkpoints/gpt2-base")
         student = Model("Qwen3-1.7B", "../Qwen3-1.7B")

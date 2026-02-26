@@ -14,14 +14,24 @@ if __name__ == "__main__":
     method = args.method # "quant" or "dist", depending on your use case
 
     if method == "quant":
-        
-        # Example for Qwen
+
+        """
+        # Example for Qwen3-4B
         args.model_type = "qwen_peft"
-        args.checkpoint_path = "./90_fine_tuned_qwen3-1.7b/checkpoint-277"
+        args.checkpoint_path = "./90_2048_fine_tuned_qwen3-4b/checkpoint-277"
+        args.tokenizer_path = "../Qwen/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c"
+        args.dataset = "wikitext2_peft"
+        args.wbits = 4
+        args.save = "./LA-framework-quant/results/quantized_model/FT_Qwen3-4B_90_2048"
+        """
+        
+        # Example for Qwen3-1.7B
+        args.model_type = "qwen_peft"
+        args.checkpoint_path = "./90_2048_fine_tuned_qwen3-1.7b/checkpoint-277"
         args.tokenizer_path = "../Qwen3-1.7B"
         args.dataset = "wikitext2_peft"
         args.wbits = 4
-        args.save = "./LA-framework-quant/results/quantized_model/FT_Qwen3-1.7B_90"
+        args.save = "./LA-framework-quant/results/quantized_model/FT_Qwen3-1.7B_90_2048"
         
 
         quantizer = Quantizer(args)

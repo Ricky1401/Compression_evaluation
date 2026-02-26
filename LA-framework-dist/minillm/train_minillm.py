@@ -2,7 +2,7 @@ import torch
 import os
 import json
 import torch.distributed as dist
-from accelerate import init_empty_weights
+from accelerate import Accelerator, cpu_offload, init_empty_weights
 
 from transformers import (
     AutoModelForCausalLM,
@@ -47,6 +47,7 @@ def get_teacher_model(args, device):
                 model.print_trainable_parameters()
                 #input()
                 model = model.base_model.model
+                
             else:
                 raise NotImplementedError
         else:
