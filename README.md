@@ -15,7 +15,7 @@ Run in this order:
 
 - `Plot_on_eval_processed.ipynb` to compute metrics on generated data,
 
-[comment]: <> (
+<!---
 Statistiche (su PEFT con output invertito):
 - PEFT 90_2048 : 1h01
 - Generation with PEFT 90_2048-batched-64 : 3h19
@@ -39,7 +39,7 @@ Statistiche (su PEFT con output corretto):
 - Generation with quantized model batched-64 : ~1h46
 
 - Distillation 1:20 -> 16:30 : 1g15h50
-)
+-->
 
 
 
